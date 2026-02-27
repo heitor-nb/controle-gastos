@@ -2,7 +2,7 @@ using System;
 
 namespace WebApi.Domain.Entities;
 
-public class BaseEntity
+public abstract class BaseEntity
 {   
     public BaseEntity()
     {
