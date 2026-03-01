@@ -12,5 +12,6 @@ public interface ITransacaoRepository : IBaseRepository<Transacao>
         Tipo? tipo = null
     );
     Task<List<Transacao>> RecuperarPorPessoaIdAsync(Guid pessoaId, CancellationToken ct);
+    Task<List<Transacao>> RecuperarTodosAsync(CancellationToken ct, bool includeCategoria = false);
     Task<(decimal Receitas, decimal Despesas)> RecuperarTotaisPorPessoaIdAsync(Guid pessoaId, CancellationToken ct);
 }
