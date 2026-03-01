@@ -11,5 +11,5 @@ public interface IBaseRepository<T> where T : BaseEntity
     Task<List<T>> RecuperarTodosAsync(CancellationToken ct);
     Task<T> RecuperarAsync(Guid id, CancellationToken ct);
     void Editar(T t);
-    void Deletar(Guid id);
+    void Deletar(T t);
 }

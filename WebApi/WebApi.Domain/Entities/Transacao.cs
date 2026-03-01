@@ -35,10 +35,12 @@ public class Transacao : BaseEntity
 
 
     /*
-        A entidade Transação tem muitas propriedades, então há um único método de edição.
-        Como nenhuma propriedade pode ter o valor igual a null, se o parâmetro correspondente
-        à propriedade for null, o método não edita essa propriedade.
-        obs.: o construtor garante que todas as propriedades sejam inicializadas.
+
+    A entidade Transação tem muitas propriedades, então há um único método de edição.
+    Como nenhuma propriedade pode ter o valor igual a null, se o parâmetro correspondente
+    à propriedade for null, o método não edita essa propriedade.
+    obs.: o construtor garante que todas as propriedades sejam inicializadas.
+    
     */
 
     public void Editar(
