@@ -8,6 +8,10 @@
 
   <ItemGroup>
     <Folder Include="Shared/Exceptions/" />
+    <Folder Include="Shared/Mappings/" />
+    <Folder Include="UseCases/CategoriaEntity/" />
+    <Folder Include="UseCases/CategoriaEntity/Commands/" />
+    <Folder Include="UseCases/CategoriaEntity/Queries/" />
     <Folder Include="UseCases/PessoaEntity/Queries/" />
   </ItemGroup>
 
