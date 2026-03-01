@@ -12,12 +12,15 @@ public class RecuperarTotaisPorCategoriaRequest(
 public class RecuperarTotaisPorCategoriaHandler : IRequestHandler<RecuperarTotaisPorCategoriaRequest, TotaisPorCategoria>
 {
     private readonly ICategoriaRepository _categoriaRepos;
+    private readonly ITransacaoRepository _transacaoRepos;
 
     public RecuperarTotaisPorCategoriaHandler(
-        ICategoriaRepository categoriaRepos
+        ICategoriaRepository categoriaRepos,
+        ITransacaoRepository transacaoRepos
     )
     {
         _categoriaRepos = categoriaRepos;
+        _transacaoRepos = transacaoRepos;
     }
     
     public async Task<TotaisPorCategoria> Handle(
@@ -31,7 +34,7 @@ public class RecuperarTotaisPorCategoriaHandler : IRequestHandler<RecuperarTotai
 
         foreach(var c in categorias)
         {   
-            var (Receitas, Despesas) = await _categoriaRepos.RecuperarTotaisPorIdAsync(c.Id, cancellationToken);
+            var (Receitas, Despesas) = await _transacaoRepos.RecuperarTotaisPorCategoriaIdAsync(c.Id, cancellationToken);
 
             totaisCategorias.Add(new(
                 c.Id.ToString(),

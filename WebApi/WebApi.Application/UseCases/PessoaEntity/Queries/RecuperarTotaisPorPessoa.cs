@@ -33,9 +33,9 @@ public class RecuperarTotaisPorPessoaHandler : IRequestHandler<RecuperarTotaisPo
         {   
             /*
 
-            Em vez de carregar as entidades transações completas na memória
-            e depois calcular os totais da pessoa no código, pode-se performar
-            essa operação no próprio banco de dados (que é mais eficiente p/ isso).
+            Em vez de carregar as entidades transações associadas completas na memória
+            e depois calcular os totais da pessoa no código, pode-se performar essa
+            operação no próprio banco de dados (que é mais eficiente p/ isso).
 
             */
 
