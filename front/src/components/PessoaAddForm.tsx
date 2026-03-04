@@ -42,10 +42,11 @@ const Container = styled.div`
 
 interface PessoaAddFormProps {
     setPessoas: React.Dispatch<React.SetStateAction<Pessoa[]>>,
-    setPopUp: React.Dispatch<React.SetStateAction<"adicionar" | "editar" | undefined>>
+    setPopUp: React.Dispatch<React.SetStateAction<"adicionar" | "editar" | undefined>>,
+    setListOption: React.Dispatch<React.SetStateAction<"pessoas" | "totais">>
 }
 
-const PessoaAddForm : FunctionComponent<PessoaAddFormProps> = ({ setPessoas, setPopUp }) => {
+const PessoaAddForm : FunctionComponent<PessoaAddFormProps> = ({ setPessoas, setPopUp, setListOption }) => {
     const [nome, setNome] = useState<string>('');
     const [idade, setIdade] = useState<string>('');
     const [warningMessage, setWarningMessage] = useState<string>();
@@ -75,6 +76,7 @@ const PessoaAddForm : FunctionComponent<PessoaAddFormProps> = ({ setPessoas, set
                         setNome('');
                         setIdade('');
                         setIsFetching(false);
+                        setListOption('pessoas');
                     });
             }} disabled={!!warningMessage || isFetching}/>
         </Container>

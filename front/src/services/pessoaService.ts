@@ -1,9 +1,17 @@
-import type { CriarPessoaRequest, EditarPessoaRequest, Pessoa } from "../@types/api/pessoa";
+import type { CriarPessoaRequest, EditarPessoaRequest, Pessoa, TotaisPorPessoa } from "../@types/api/pessoa";
 
 export async function recuperarPessoas() : Promise<Pessoa[]> {
     const response = await fetch("http://localhost:5231/pessoa/recuperar-todas");
 
     if(!response.ok) throw new Error("Erro ao recuperar pessoas.");
+
+    return response.json();
+}
+
+export async function recuperarTotaisPorPessoa() : Promise<TotaisPorPessoa> {
+    const response = await fetch("http://localhost:5231/pessoa/recuperar-totais-por-pessoa");
+
+    if(!response.ok) throw new Error("Erro ao recuperar totais por pessoa.");
 
     return response.json();
 }
