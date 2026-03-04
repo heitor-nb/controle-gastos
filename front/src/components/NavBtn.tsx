@@ -26,8 +26,11 @@ interface NavBtnProps {
 const NavBtn : FunctionComponent<NavBtnProps> = ({ text }) => {
     const navigate = useNavigate();
 
+    let route = text.toLowerCase();
+    if(text === 'Transações') route = 'transacoes';
+
     return (
-        <Container onClick={() => navigate(`/${text.toLowerCase()}`)}>
+        <Container onClick={() => navigate(`/${route}`)}>
             {text}
         </Container>
     )
