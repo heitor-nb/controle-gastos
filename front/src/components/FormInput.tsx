@@ -4,10 +4,6 @@ import styled, { useTheme } from "styled-components";
 const Container = styled.div`
     position: relative;
     width: 80%;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 0.2rem;
     font-family: ${({theme}) => theme.fonts.default};
     color: ${({theme}) => theme.colors.text};
 `

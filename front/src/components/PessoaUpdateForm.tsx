@@ -68,7 +68,7 @@ const PessoaUpdateForm : FunctionComponent<PessoaUpdateFormProps> = ({ pessoa, s
                 }
                 setWarningMessage(undefined);
             }} warningMessage={warningMessage} disabled={isFetching}/>
-            <PageBtn width="80%" variant="colored" text="Editar" onClick={() => {
+            <PageBtn width="80%" variant="colored" fontWeight={700} text="Editar" onClick={() => {
                 if(!!warningMessage || isFetching) return;
                 setIsFetching(true);
                 editarPessoa({ id: pessoa.id, nome: nome, idade: Number(idade) })

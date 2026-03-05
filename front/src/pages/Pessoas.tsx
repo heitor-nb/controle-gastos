@@ -11,7 +11,7 @@ import PessoaAddForm from "../components/PessoaAddForm";
 import PessoaUpdateForm from "../components/PessoaUpdateForm";
 import TotaisPessoaHeader from "../components/TotaisPessoaHeader";
 import TotaisPessoaLi from "../components/TotaisPessoaLi";
-import TotaisPorPessoaFooter from "../components/TotaisPorPessoaFooter";
+import TotaisFooter from "../components/TotaisFooter";
 
 const Wrapper = styled.div`
     position: relative;
@@ -84,7 +84,7 @@ const Pessoas = () => {
                     <>
                         <TotaisPessoaHeader />
                         {(totaisPorPessoa.totaisPessoas.map((t, index) => <TotaisPessoaLi totais={t} key={index}/>))}
-                        <TotaisPorPessoaFooter receitas={totaisPorPessoa.receitasTotais} despesas={totaisPorPessoa.despesasTotais} saldo={totaisPorPessoa.saldoTotal}/>
+                        <TotaisFooter receitas={totaisPorPessoa.receitasTotais} despesas={totaisPorPessoa.despesasTotais} saldo={totaisPorPessoa.saldoTotal}/>
                     </>}
                 </ListContainer>
             </Wrapper>

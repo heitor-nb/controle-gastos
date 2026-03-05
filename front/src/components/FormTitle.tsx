@@ -7,9 +7,9 @@ const Title = styled.h3`
     justify-content: center;
     align-items: center;
     font-family: ${({theme}) => theme.fonts.default};
-    color: ${({theme}) => theme.colors.text};
     font-weight: 700;
     font-size: 1.5rem;
+    color: ${({theme}) => theme.colors.text};
 `
 
 interface FormTitleProps {

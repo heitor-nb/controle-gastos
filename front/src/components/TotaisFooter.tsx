@@ -23,13 +23,13 @@ const Wrapper = styled.div`
     white-space: nowrap;
 `
 
-interface TotaisPorPessoaFooterProps {
+interface TotaisFooterProps {
     receitas: number,
     despesas: number,
     saldo: number
 }
 
-const TotaisPorPessoaFooter : FunctionComponent<TotaisPorPessoaFooterProps> = ({ receitas, despesas, saldo }) => {
+const TotaisFooter : FunctionComponent<TotaisFooterProps> = ({ receitas, despesas, saldo }) => {
     const labelStyle = { fontStyle: "italic" };
 
     return (
@@ -43,4 +43,4 @@ const TotaisPorPessoaFooter : FunctionComponent<TotaisPorPessoaFooterProps> = ({
     )
 };
 
-export default TotaisPorPessoaFooter;
+export default TotaisFooter;

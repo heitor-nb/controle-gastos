@@ -3,7 +3,8 @@ import styled, { useTheme } from "styled-components";
 
 interface BtnProps {
     $width: string,
-    $variant: 'colored' | 'outlined'
+    $variant: 'colored' | 'outlined',
+    $fontWeight?: number
 }
 
 const Btn = styled.div<BtnProps>`
@@ -18,6 +19,7 @@ const Btn = styled.div<BtnProps>`
     align-items: center;
     cursor: pointer;
     font-family: ${({theme}) => theme.fonts.default};
+    font-weight: ${({$fontWeight}) => $fontWeight ?? 400};
     font-size: 0.8rem;
     color: ${({theme}) => theme.colors.text};
 
@@ -30,12 +32,13 @@ const Btn = styled.div<BtnProps>`
 interface PageBtnProps {
     width: string,
     variant: 'colored' | 'outlined',
+    fontWeight?: number,
     text: string,
     onClick: () => void,
     disabled?: boolean
 }
 
-const PageBtn : FunctionComponent<PageBtnProps> = ({ width, variant, text, onClick, disabled }) => {
+const PageBtn : FunctionComponent<PageBtnProps> = ({ width, variant, fontWeight, text, onClick, disabled }) => {
     const theme = useTheme();
 
     const disabledStyle = {
@@ -45,7 +48,7 @@ const PageBtn : FunctionComponent<PageBtnProps> = ({ width, variant, text, onCli
     };
 
     return (
-        <Btn $width={width} $variant={variant} style={disabled ? disabledStyle : undefined} onClick={onClick}>
+        <Btn $width={width} $variant={variant} $fontWeight={fontWeight} style={disabled ? disabledStyle : undefined} onClick={onClick}>
             {text}
         </Btn>
     )

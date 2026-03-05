@@ -1,6 +1,9 @@
-export type Pessoa = {
+export type BaseEntity = {
     id: string,
-    criadoEm: string,
+    criadoEm: string
+}
+
+export type Pessoa = BaseEntity & {
     nome: string,
     idade: number
 };

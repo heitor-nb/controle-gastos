@@ -60,13 +60,14 @@ const PessoaAddForm : FunctionComponent<PessoaAddFormProps> = ({ setPessoas, set
             <FormInput label="Idade" value={idade} onChange={(e) => {
                 const value = e.target.value;
                 setIdade(value);
-                if(Number.isNaN(value) || parseInt(value) <= 0){
+                const parsedValue = parseInt(value);
+                if(Number.isNaN(parsedValue) || parsedValue <= 0){
                     setWarningMessage("A idade deve ser um inteiro maior que 0.");
                     return;
                 }
                 setWarningMessage(undefined);
             }} warningMessage={warningMessage} disabled={isFetching}/>
-            <PageBtn width="80%" variant="colored" text="Adicionar" onClick={() => {
+            <PageBtn width="80%" variant="colored" fontWeight={700} text="Adicionar" onClick={() => {
                 if(!!warningMessage || isFetching) return;
                 setIsFetching(true);
                 criarPessoa({ nome: nome, idade: Number(idade) })
