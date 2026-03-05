@@ -8,6 +8,7 @@ public static class TransacaoMappings
 {
     public static TransacaoDto ToDto(this Transacao transacao) => new(
         transacao.Id.ToString(),
+        transacao.CriadoEm,
         transacao.Descricao.Valor,
         transacao.Valor,
         transacao.Tipo,

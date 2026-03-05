@@ -8,6 +8,7 @@ public static class CategoriaMappings
 {
     public static CategoriaDto ToDto(this Categoria categoria) => new (
         categoria.Id.ToString(),
+        categoria.CriadoEm,
         categoria.Descricao.Valor,
         categoria.Finalidade
     );
