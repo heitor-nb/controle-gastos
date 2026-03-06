@@ -1,7 +1,9 @@
 import type { Categoria, CriarCategoriaRequest, TotaisPorCategoria } from "../@types/api/categoria";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export async function recuperarCategorias() : Promise<Categoria[]> {
-    const response = await fetch("http://localhost:5231/categoria/recuperar-todas");
+    const response = await fetch(`${apiUrl}/categoria/recuperar-todas`);
 
     if(!response.ok) throw new Error("Erro ao recuperar categorias.");
 
@@ -9,7 +11,7 @@ export async function recuperarCategorias() : Promise<Categoria[]> {
 }
 
 export async function recuperarTotaisPorCategoria() : Promise<TotaisPorCategoria> {
-    const response = await fetch("http://localhost:5231/categoria/recuperar-totais-por-categoria");
+    const response = await fetch(`${apiUrl}/categoria/recuperar-totais-por-categoria`);
 
     if(!response.ok) throw new Error("Erro ao recuperar totais por categoria.");
 
@@ -17,7 +19,7 @@ export async function recuperarTotaisPorCategoria() : Promise<TotaisPorCategoria
 }
 
 export async function criarCategoria(body : CriarCategoriaRequest) : Promise<Categoria> {
-    const response = await fetch("http://localhost:5231/categoria", {
+    const response = await fetch(`${apiUrl}/categoria`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

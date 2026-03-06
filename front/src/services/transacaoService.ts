@@ -1,7 +1,9 @@
 import type { CriarTransacaoRequest, Transacao } from "../@types/api/transacao";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export async function recuperarTransacoes() : Promise<Transacao[]> {
-    const response = await fetch("http://localhost:5231/transacao/recuperar-todas");
+    const response = await fetch(`${apiUrl}/transacao/recuperar-todas`);
 
     if(!response.ok) throw new Error("Erro ao recuperar transações.");
 
@@ -9,7 +11,7 @@ export async function recuperarTransacoes() : Promise<Transacao[]> {
 }
 
 export async function criarTransacao(body : CriarTransacaoRequest) : Promise<Transacao> {
-    const response = await fetch("http://localhost:5231/transacao", {
+    const response = await fetch(`${apiUrl}/transacao`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

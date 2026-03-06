@@ -74,7 +74,7 @@ const Pessoas = () => {
                 {popUp === 'adicionar' && <PessoaAddForm setPessoas={setPessoas} setPopUp={setPopUp} setListOption={setListOption}/>}
                 {popUp === 'editar' && <PessoaUpdateForm pessoa={targetPessoa} setTargetPessoa={setTargetPessoa} setPessoas={setPessoas} setPopUp={setPopUp}/>}
                 <ListContainer>
-                    {isFetching && <div>Loading</div>}
+                    {isFetching && <>...</>}
                     {!isFetching && listOption === 'pessoas' && 
                     <>
                         <PessoaHeader />

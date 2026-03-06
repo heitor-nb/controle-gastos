@@ -66,7 +66,7 @@ const Transacoes = () => {
                 </BtnsWrapper>
                 {popUp === 'adicionar' && <TransacaoAddForm setTransacoes={setTransacoes} setPopUp={setPopUp}/>}
                 <ListContainer>
-                    {isFetching && <div>Loading</div>}
+                    {isFetching && <>...</>}
                     {!isFetching && 
                     <>
                         <TransacaoHeader />

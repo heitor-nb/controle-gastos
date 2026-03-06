@@ -69,7 +69,7 @@ const Categorias = () => {
                 </BtnsWrapper>
                 {popUp === 'adicionar' && <CategoriaAddForm setCategorias={setCategorias} setPopUp={setPopUp} setListOption={setListOption}/>}
                 <ListContainer>
-                    {isFetching && <div>Loading</div>}
+                    {isFetching && <>...</>}
                     {!isFetching && listOption === 'categorias' && 
                     <>
                         <CategoriaHeader labels={['ID', 'Descrição', 'Finalidade', 'Criado em']}/>
