@@ -19,7 +19,7 @@ public class CategoriaRepository : BaseRepository<Categoria>, ICategoriaReposito
     {
         await using var transaction = await _context.Database.BeginTransactionAsync(ct);
 
-        var existingCategoria = await _context.Categorias.SingleOrDefaultAsync(p => p.Descricao == categoria.Descricao, ct);
+        var existingCategoria = await _context.Categorias.SingleOrDefaultAsync(p => p.Descricao.Valor == categoria.Descricao.Valor, ct);
 
         if(existingCategoria != null) throw new AppException("A descrição informada já é associada a uma categoria.");
 

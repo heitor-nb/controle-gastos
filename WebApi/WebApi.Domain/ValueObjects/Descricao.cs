@@ -7,6 +7,8 @@ public class Descricao
 {
     public Descricao(string valor) => EditarValor(valor);
 
+    protected Descricao() { }
+
     public string Valor { get; private set; } = null!;
 
     public void EditarValor(
