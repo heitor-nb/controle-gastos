@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using WebApi.Api;
-using WebApi.Application.UseCases.PessoaEntity.Commands.CriarPessoa;
+using WebApi.Application.UseCases.PessoaEntity.Commands;
 using WebApi.Infra.Persistance;
 
 var builder = WebApplication.CreateBuilder(args);

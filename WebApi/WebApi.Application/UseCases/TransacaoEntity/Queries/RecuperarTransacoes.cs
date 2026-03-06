@@ -28,7 +28,8 @@ public class RecuperarTransacoesHandler : IRequestHandler<RecuperarTransacoesReq
     {
         var transacoes = await _transacaoRepos.RecuperarTodosAsync(
             cancellationToken,
-            includeCategoria: true
+            includeCategoria: true,
+            includePessoa: true
         );
 
         return [.. transacoes.Select(t => t.ToDto())];

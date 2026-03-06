@@ -16,22 +16,27 @@ public record CriarCategoriaRequest(
 public class CriarCategoriaHandler : IRequestHandler<CriarCategoriaRequest, CategoriaDto>
 {
     private readonly ICategoriaRepository _categoriaRepos;
-    private readonly IUnitOfWork _unitOfWork;
 
     public CriarCategoriaHandler(
-        ICategoriaRepository categoriaRepos,
-        IUnitOfWork unitOfWork
+        ICategoriaRepository categoriaRepos
     )
     {
         _categoriaRepos = categoriaRepos;
-        _unitOfWork = unitOfWork;
     }
 
     public async Task<CategoriaDto> Handle(
         CriarCategoriaRequest request, 
         CancellationToken cancellationToken
     )
-    {
+    {   
+        /*
+
+        Na documentação, não é especificado que a descrição da categoria deve ser única.
+        Mas eu considerei interessante que essa propriedade fosse única.
+        obs.: a validação ocorre dentro da transaction do db.
+
+        */
+
         var descricao = new Descricao(request.Descricao);
 
         var categoria = new Categoria(
@@ -40,7 +45,6 @@ public class CriarCategoriaHandler : IRequestHandler<CriarCategoriaRequest, Cate
         );
 
         await _categoriaRepos.CriarAsync(categoria, cancellationToken);
-        await _unitOfWork.SalvarAsync(cancellationToken);
 
         return categoria.ToDto(); // CategoriaMappings
     }

@@ -9,5 +9,5 @@ public record TransacaoDto(
     decimal Valor,
     string Tipo,
     string Categoria,
-    string PessoaId
+    string Pessoa
 );

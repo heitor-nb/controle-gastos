@@ -19,6 +19,11 @@ public class WebApiContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {   
+        modelBuilder.Entity<Pessoa>()
+            .HasMany(p => p.Transacoes)
+            .WithOne(t => t.Pessoa)
+            .HasForeignKey(t => t.PessoaId);
+
         var categoriaBuilder = modelBuilder.Entity<Categoria>();
         categoriaBuilder.OwnsOne(c => c.Descricao);
         categoriaBuilder

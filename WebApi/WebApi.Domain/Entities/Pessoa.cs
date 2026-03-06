@@ -16,13 +16,18 @@ public class Pessoa : BaseEntity
 
     protected Pessoa() { } // Construtor sem parâmetros para o funcionamento do EF.
 
+    private readonly List<Transacao> _transacoes = [];
+
     public string Nome { get; private set; } = null!;
     public int Idade { get; private set; }
+    public IReadOnlyCollection<Transacao> Transacoes => _transacoes;
 
     public void EditarNome(
         string nome
     )
-    {
+    {   
+        if(string.IsNullOrWhiteSpace(nome)) throw new DomainException("O nome informado não pode ser vazio.");
+
         if(nome.Length > 200) throw new DomainException("O nome informado pode ter, no máximo, 200 caracteres.");
 
         Nome = nome;

@@ -12,7 +12,9 @@ public class Descricao
     public void EditarValor(
         string valor
     )
-    {
+    {   
+        if(string.IsNullOrWhiteSpace(valor)) throw new DomainException("A descrição informada não pode ser vazia.");
+
         if(valor.Length > 400) throw new DomainException("A descrição informada pode ter, no máximo, 400 caracteres.");
 
         Valor = valor;

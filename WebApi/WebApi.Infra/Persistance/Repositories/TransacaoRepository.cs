@@ -19,11 +19,16 @@ public class TransacaoRepository : BaseRepository<Transacao>, ITransacaoReposito
         return transacoes;
     }
 
-    public async Task<List<Transacao>> RecuperarTodosAsync(CancellationToken ct, bool includeCategoria = false)
+    public async Task<List<Transacao>> RecuperarTodosAsync(
+        CancellationToken ct, 
+        bool includeCategoria = false,
+        bool includePessoa = false
+    )
     {
         var transacoes = _context.Transacoes.AsQueryable();
 
         if(includeCategoria) transacoes = transacoes.Include(t => t.Categoria);
+        if(includePessoa) transacoes = transacoes.Include(t => t.Pessoa);
 
         return await transacoes.ToListAsync(ct);
     }
@@ -58,14 +63,5 @@ public class TransacaoRepository : BaseRepository<Transacao>, ITransacaoReposito
             .SumAsync(t => t.Valor, ct);
 
         return (receitas, despesas);
-    }
-
-    public async Task<bool> VerificarExistenciaPorPessoaIdAsync(
-        Guid pessoaId, 
-        CancellationToken ct, 
-        Tipo? tipo = null
-    )
-    {   
-        return await _context.Transacoes.AnyAsync(t => t.PessoaId == pessoaId && (tipo == null || t.Tipo == tipo.ToString()));
     }
 }

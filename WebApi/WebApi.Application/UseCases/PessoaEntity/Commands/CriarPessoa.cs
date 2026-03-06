@@ -3,7 +3,7 @@ using MediatR;
 using WebApi.Domain.Entities;
 using WebApi.Domain.Interfaces.Repositories;
 
-namespace WebApi.Application.UseCases.PessoaEntity.Commands.CriarPessoa;
+namespace WebApi.Application.UseCases.PessoaEntity.Commands;
 
 public record CriarPessoaRequest(
     string Nome,
@@ -13,15 +13,12 @@ public record CriarPessoaRequest(
 public class CriarPessoaHandler : IRequestHandler<CriarPessoaRequest, Pessoa>
 {
     private readonly IPessoaRepository _pessoaRepos;
-    private readonly IUnitOfWork _unitOfWork;
 
     public CriarPessoaHandler(
-        IPessoaRepository pessoaRepos,
-        IUnitOfWork unitOfWork
+        IPessoaRepository pessoaRepos
     )
     {
         _pessoaRepos = pessoaRepos;
-        _unitOfWork = unitOfWork;
     }
 
     public async Task<Pessoa> Handle(
@@ -31,7 +28,8 @@ public class CriarPessoaHandler : IRequestHandler<CriarPessoaRequest, Pessoa>
         /*
 
         Na documentação, não é especificado que o nome da pessoa deve ser único.
-        Por isso não há essa validação.
+        Mas eu considerei interessante que essa propriedade fosse única.
+        obs.: a validação ocorre dentro da transaction do db.
 
         */
 
@@ -41,7 +39,6 @@ public class CriarPessoaHandler : IRequestHandler<CriarPessoaRequest, Pessoa>
         );
 
         await _pessoaRepos.CriarAsync(pessoa, cancellationToken);
-        await _unitOfWork.SalvarAsync(cancellationToken);
 
         return pessoa;
     }

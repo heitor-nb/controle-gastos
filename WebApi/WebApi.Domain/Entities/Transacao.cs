@@ -31,6 +31,7 @@ public class Transacao : BaseEntity
     public string Tipo { get; private set; } = null!;
     public Categoria Categoria { get; private set; } = null!;
     public Guid CategoriaId { get; private set; }
+    public Pessoa Pessoa { get; private set; } = null!;
     public Guid PessoaId { get; private set; }
 
 
@@ -67,8 +68,8 @@ public class Transacao : BaseEntity
             Tipo = tipo;
         }
 
-        var ambos = Finalidade.ambos;
-        var despesa = Enums.Tipo.despesa;
+        var ambos = Finalidade.ambos.ToString();
+        var despesa = Enums.Tipo.despesa.ToString();
 
         if(categoria != null)
         {   
@@ -82,6 +83,7 @@ public class Transacao : BaseEntity
         {
             if(pessoa.Idade < 18 && !Tipo.Equals(despesa)) throw new DomainException($"Apenas transações do tipo {despesa} são aceitas de menores de idade.");
 
+            Pessoa = pessoa;
             PessoaId = pessoa.Id; 
         }
     }

@@ -13,6 +13,6 @@ public static class TransacaoMappings
         transacao.Valor,
         transacao.Tipo,
         transacao.Categoria.Descricao.Valor,
-        transacao.PessoaId.ToString()
+        transacao.Pessoa.Nome
     );
 }

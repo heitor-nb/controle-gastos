@@ -2,8 +2,6 @@ using System;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Application.UseCases.PessoaEntity.Commands;
-using WebApi.Application.UseCases.PessoaEntity.Commands.CriarPessoa;
-using WebApi.Application.UseCases.PessoaEntity.Commands.EditarPessoa;
 using WebApi.Application.UseCases.PessoaEntity.Queries;
 
 namespace WebApi.Api.Controllers;
