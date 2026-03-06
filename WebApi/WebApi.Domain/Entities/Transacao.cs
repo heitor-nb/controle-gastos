@@ -71,6 +71,8 @@ public class Transacao : BaseEntity
         var ambos = Finalidade.ambos.ToString();
         var despesa = Enums.Tipo.despesa.ToString();
 
+        // Garante coerência entre o tipo da transação e a finalidade da categoria.
+
         if(categoria != null)
         {   
             if(!categoria.Finalidade.Equals(ambos) && !categoria.Finalidade.Equals(tipo)) throw new DomainException($"A categoria informada deve ter a finalidade {ambos} ou {tipo}.");
@@ -78,6 +80,8 @@ public class Transacao : BaseEntity
             Categoria = categoria;
             CategoriaId = categoria.Id;
         }
+
+        // Garante que uma pessoa menor de idade não seja associada a uma transação do tipo receita.
 
         if(pessoa != null)
         {

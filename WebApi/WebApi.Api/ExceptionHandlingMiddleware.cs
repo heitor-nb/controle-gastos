@@ -21,6 +21,8 @@ public class ExceptionHandlingMiddleware
 
     public async Task InvokeAsync(HttpContext context)
     {
+        // Esse middleware permite tratamento global de exceptions da aplicação.
+
         try
         {
             await _next(context);

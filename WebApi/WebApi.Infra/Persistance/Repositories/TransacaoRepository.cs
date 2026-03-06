@@ -27,6 +27,14 @@ public class TransacaoRepository : BaseRepository<Transacao>, ITransacaoReposito
     {
         var transacoes = _context.Transacoes.AsQueryable();
 
+        /*
+
+        O Include permite carregar entidades associadas.
+        Então, por exemplo, se eu fizer transacoes.Include(t => t.Pessoa),
+        eu posso acessar as propriedades da Pessoa associada a cada transação.
+
+        */
+
         if(includeCategoria) transacoes = transacoes.Include(t => t.Categoria);
         if(includePessoa) transacoes = transacoes.Include(t => t.Pessoa);
 

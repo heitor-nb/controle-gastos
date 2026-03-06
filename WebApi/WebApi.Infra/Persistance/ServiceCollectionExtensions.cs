@@ -9,6 +9,8 @@ namespace WebApi.Infra.Persistance;
 
 public static class ServiceCollectionExtensions
 {
+    // Método de extensão para adicionar os serviços sem poluir o Program.cs
+
     public static IServiceCollection AddPersistanceServices(
         this IServiceCollection services,
         IConfiguration cfg

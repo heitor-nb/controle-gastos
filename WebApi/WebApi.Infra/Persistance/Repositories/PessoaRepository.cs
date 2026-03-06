@@ -20,6 +20,13 @@ public class PessoaRepository : BaseRepository<Pessoa>, IPessoaRepository
         CancellationToken ct
     )
     {
+        /*
+
+        A transaction permite performar diferentes operações de forma atômica no banco de dados.
+        Esse recurso é essencial para evitar race conditions.
+
+        */
+
         await using var transaction = await _context.Database.BeginTransactionAsync(ct);
 
         var existingPessoa = await _context.Pessoas.SingleOrDefaultAsync(p => p.Nome == pessoa.Nome, ct);
@@ -41,6 +48,8 @@ public class PessoaRepository : BaseRepository<Pessoa>, IPessoaRepository
         await using var transaction = await _context.Database.BeginTransactionAsync(ct);
 
         var pessoa = await RecuperarAsync(id, ct) ?? throw new NotFoundException("O ID informado não pertence a nenhuma pessoa.");
+
+        // Se o nome informado já é associado a alguma pessoa, a edição não pode ser completada.
 
         if (!string.IsNullOrWhiteSpace(nome))
         {

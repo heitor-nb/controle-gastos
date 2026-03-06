@@ -19,6 +19,8 @@ public class WebApiContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {   
+        // Aqui ocorre a configuração explícita dos relacionamentos entre as entidades.
+
         modelBuilder.Entity<Pessoa>()
             .HasMany(p => p.Transacoes)
             .WithOne(t => t.Pessoa)

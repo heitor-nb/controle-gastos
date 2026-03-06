@@ -34,6 +34,14 @@ public class RecuperarTotaisPorCategoriaHandler : IRequestHandler<RecuperarTotai
 
         foreach(var c in categorias)
         {   
+            /*
+
+            Em vez de carregar as entidades transações associadas completas na memória
+            e depois calcular os totais da categoria no código, pode-se performar essa
+            operação no próprio banco de dados (que é mais eficiente p/ isso).
+
+            */
+
             var (Receitas, Despesas) = await _transacaoRepos.RecuperarTotaisPorCategoriaIdAsync(c.Id, cancellationToken);
 
             totaisCategorias.Add(new(
