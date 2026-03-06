@@ -1,5 +1,5 @@
 import type { FunctionComponent } from "react";
-import type { TotaisPessoa } from "../@types/api/pessoa"
+import type { TotaisPessoa } from "../../@types/api/pessoa"
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -15,7 +15,7 @@ const Wrapper = styled.div`
     flex: 1;
     height: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     overflow: scroll;
     font-family: ${({theme}) => theme.fonts.default};
@@ -30,7 +30,6 @@ interface TotaisPessoaLiProps {
 const TotaisPessoaLi : FunctionComponent<TotaisPessoaLiProps> = ({ totais }) => {
     return (
         <Container>
-            {/* <Wrapper style={{justifyContent: 'start'}}>{totais.id}</Wrapper> */}
             <Wrapper>{totais.nome}</Wrapper>
             <Wrapper>{totais.idade}</Wrapper>
             <Wrapper>{totais.receitas}</Wrapper>

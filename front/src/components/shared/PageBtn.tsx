@@ -9,7 +9,7 @@ interface BtnProps {
 
 const Btn = styled.div<BtnProps>`
     width: ${({$width}) => $width};
-    height: 3rem;
+    min-height: 3rem;
     border: ${({$variant, theme}) => $variant === 'outlined' ? `solid 1px ${theme.colors.surface}` : 'none'};
     border-radius: 0.5rem;
     background: ${({$variant, theme}) => $variant === 'outlined' ? theme.colors.background : theme.colors.primary};

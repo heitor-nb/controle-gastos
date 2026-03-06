@@ -14,7 +14,7 @@ const Info = styled.div`
     flex: 1;
     height: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     overflow: scroll;
     font-family: ${({theme}) => theme.fonts.default};

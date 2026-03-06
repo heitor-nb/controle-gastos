@@ -1,12 +1,17 @@
 import type { BaseEntity } from "./pessoa";
 
 export type CriarTransacaoRequest = {
-    descricao: number,
+    descricao: string,
     valor: number,
-    tipo: 'receita' | 'despesa'
+    tipo: 'receita' | 'despesa',
+    categoriaId: string,
+    pessoaId: string
 }
 
-export type Transacao = BaseEntity & CriarTransacaoRequest & {
+export type Transacao = BaseEntity & {
+    descricao: string,
+    valor: number,
+    tipo: 'receita' | 'despesa',
     categoria: string,
     pessoa: string
 }

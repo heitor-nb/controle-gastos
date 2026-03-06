@@ -1,11 +1,12 @@
 import { useState, type FunctionComponent } from "react";
 import styled from "styled-components";
-import FormTitle from "./FormTitle";
-import FormInput from "./FormInput";
-import PageBtn from "./PageBtn";
+import FormTitle from "../shared/FormTitle";
+import FormInput from "../shared/FormInput";
+import PageBtn from "../shared/PageBtn";
 import { IoMdClose } from "react-icons/io";
-import { criarPessoa } from "../services/pessoaService";
-import type { Pessoa } from "../@types/api/pessoa";
+import { criarPessoa } from "../../services/pessoaService";
+import type { Pessoa } from "../../@types/api/pessoa";
+import FormErrorMessage from "../shared/FormErrorMessage";
 
 const Container = styled.div`
     position: absolute;
@@ -49,37 +50,53 @@ interface PessoaAddFormProps {
 const PessoaAddForm : FunctionComponent<PessoaAddFormProps> = ({ setPessoas, setPopUp, setListOption }) => {
     const [nome, setNome] = useState<string>('');
     const [idade, setIdade] = useState<string>('');
-    const [warningMessage, setWarningMessage] = useState<string>();
+    const [nomeWarningMessage, setNomeWarningMessage] = useState<string>();
+    const [idadeWarningMessage, setIdadeWarningMessage] = useState<string>();
     const [isFetching, setIsFetching] = useState<boolean>(false);
+    const [errorMessage, setErrorMessage] = useState<string>();
+
+    const disabledCondition = !!nomeWarningMessage || !!idadeWarningMessage || isFetching || nome === '' || idade === ''; 
 
     return (
         <Container>
             <IoMdClose className="close-btn" onClick={() => setPopUp(undefined)}/>
             <FormTitle text="Adicionar pessoa"/>
-            <FormInput label="Nome" value={nome} onChange={(e) => setNome(e.target.value)} disabled={isFetching}/>
+            <FormInput label="Nome" value={nome} onChange={(e) => {
+                const value = e.target.value;
+                setNome(value);
+                if(value === ''){
+                    setNomeWarningMessage('O nome não pode ser vazio.');
+                    return;
+                }
+                setNomeWarningMessage(undefined);
+            }} warningMessage={nomeWarningMessage} disabled={isFetching}/>
             <FormInput label="Idade" value={idade} onChange={(e) => {
                 const value = e.target.value;
                 setIdade(value);
                 const parsedValue = parseInt(value);
-                if(Number.isNaN(parsedValue) || parsedValue <= 0){
-                    setWarningMessage("A idade deve ser um inteiro maior que 0.");
+                if(Number.isNaN(parsedValue) || parsedValue <= 0 || parsedValue > 100){
+                    setIdadeWarningMessage("A idade deve ser um inteiro entre 1 e 100.");
                     return;
                 }
-                setWarningMessage(undefined);
-            }} warningMessage={warningMessage} disabled={isFetching}/>
+                setIdadeWarningMessage(undefined);
+            }} warningMessage={idadeWarningMessage} disabled={isFetching}/>
+            <FormErrorMessage message={errorMessage}/>
             <PageBtn width="80%" variant="colored" fontWeight={700} text="Adicionar" onClick={() => {
-                if(!!warningMessage || isFetching) return;
+                if(disabledCondition) return;
                 setIsFetching(true);
                 criarPessoa({ nome: nome, idade: Number(idade) })
-                    .then((pessoa) => setPessoas(prev => [pessoa, ...prev]))
-                    .catch(err => console.log(err))
+                    .then((pessoa) => {
+                        setErrorMessage(undefined);
+                        setPessoas(prev => [pessoa, ...prev]);
+                    })
+                    .catch(err => setErrorMessage(err.message))
                     .finally(() => {
                         setNome('');
                         setIdade('');
                         setIsFetching(false);
                         setListOption('pessoas');
                     });
-            }} disabled={!!warningMessage || isFetching}/>
+            }} disabled={disabledCondition}/>
         </Container>
     )
 }

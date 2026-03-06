@@ -1,12 +1,13 @@
 import { useState, type FunctionComponent } from "react";
 import styled from "styled-components";
-import FormTitle from "./FormTitle";
-import FormInput from "./FormInput";
-import PageBtn from "./PageBtn";
+import FormTitle from "../shared/FormTitle";
+import FormInput from "../shared/FormInput";
+import PageBtn from "../shared/PageBtn";
 import { IoMdClose } from "react-icons/io";
-import type { Categoria } from "../@types/api/categoria";
-import FormSelect from "./FormSelect";
-import { criarCategoria } from "../services/categoriaService";
+import type { Categoria } from "../../@types/api/categoria";
+import FormSelect from "../shared/FormSelect";
+import { criarCategoria } from "../../services/categoriaService";
+import FormErrorMessage from "../shared/FormErrorMessage";
 
 const Container = styled.div`
     position: absolute;
@@ -50,14 +51,26 @@ interface CategoriaAddFormProps {
 const CategoriaAddForm : FunctionComponent<CategoriaAddFormProps> = ({ setCategorias, setPopUp, setListOption }) => {
     const [descricao, setDescricao] = useState<string>('');
     const [finalidade, setFinalidade] = useState<'receita' | 'despesa' | 'ambos'>('receita');
+    const [descricaoWarningMessage, setDescricaoWarningMessage] = useState<string>();
     const [isFetching, setIsFetching] = useState<boolean>(false);
+    const [errorMessage, setErrorMessage] = useState<string>();
+
+    const disabledCondition = !!descricaoWarningMessage || isFetching || descricao === ''; 
 
     return (
         <Container>
             <IoMdClose className="close-btn" onClick={() => setPopUp(undefined)}/>
             <FormTitle text="Adicionar categoria"/>
-            <FormInput label="Descrição" value={descricao} onChange={(e) => setDescricao(e.target.value)} disabled={isFetching}/>
-            <FormSelect label="Finalidade" values={['receita', 'despesa', 'ambos']} onChange={(e) => {
+            <FormInput label="Descrição" value={descricao} onChange={(e) => {
+                const value = e.target.value;
+                setDescricao(value);
+                if(value === ''){
+                    setDescricaoWarningMessage('A descrição não pode ser vazia.');
+                    return;
+                }
+                setDescricaoWarningMessage(undefined);
+            }} warningMessage={descricaoWarningMessage} disabled={isFetching}/>
+            <FormSelect label="Finalidade" values={[{ value: 'receita' }, { value: 'despesa' }, { value: 'ambos' }]} onChange={(e) => {
                 switch(e.target.value){
                     case 'receita':
                         setFinalidade('receita');
@@ -72,19 +85,22 @@ const CategoriaAddForm : FunctionComponent<CategoriaAddFormProps> = ({ setCatego
                         console.log("Erro ao setar finalidade.");
                 }
             }} disabled={isFetching}/>
+            <FormErrorMessage message={errorMessage}/>
             <PageBtn width="80%" variant="colored" fontWeight={700} text="Adicionar" onClick={() => {
-                if(isFetching) return;
+                if(disabledCondition) return;
                 setIsFetching(true);
                 criarCategoria({ descricao, finalidade })
-                    .then((categoria) => setCategorias(prev => [categoria, ...prev]))
-                    .catch(err => console.log(err))
+                    .then((categoria) => {
+                        setErrorMessage(undefined);
+                        setCategorias(prev => [categoria, ...prev]);
+                    })
+                    .catch(err => setErrorMessage(err.message))
                     .finally(() => {
                         setDescricao('');
-                        setFinalidade('receita');
                         setIsFetching(false);
                         setListOption('categorias');
                     });
-            }} disabled={isFetching}/>
+            }} disabled={disabledCondition}/>
         </Container>
     )
 }

@@ -25,7 +25,10 @@ export async function criarPessoa(body : CriarPessoaRequest) : Promise<Pessoa> {
         body: JSON.stringify(body)
     });
 
-    if(!response.ok) throw new Error("Erro ao criar pessoa.");
+    if(!response.ok){
+        const error = await response.json();
+        throw new Error(error.message);
+    }
 
     return response.json();
 }
@@ -39,7 +42,10 @@ export async function editarPessoa(body : EditarPessoaRequest) : Promise<Pessoa>
         body: JSON.stringify(body)
     });
 
-    if(!response.ok) throw new Error("Erro ao editar pessoa.");
+    if(!response.ok){
+        const error = await response.json();
+        throw new Error(error.message);
+    }
 
     return response.json();
 }

@@ -19,16 +19,21 @@ const Label = styled.label`
 const Select = styled.select`
     margin-top: 1.2rem;
     width: 100%;
-    height: 2rem;
+    min-height: 2rem;
     border: solid 1px ${({theme}) => theme.colors.text};
     border-radius: 0.5rem;
     background: ${({theme}) => theme.colors.surface};
     font-size: 0.8rem;
 `
 
+interface OptionValue {
+    value: string,
+    displayValue?: string
+};
+
 interface FormSelectProps {
     label: string,
-    values: string[]
+    values: OptionValue[]
     onChange: React.ChangeEventHandler<HTMLSelectElement, HTMLSelectElement> | undefined,
     disabled: boolean
 }
@@ -42,7 +47,7 @@ const FormSelect : FunctionComponent<FormSelectProps> = ({ label, values, onChan
         <Container>
             <Label>{label}</Label>
             <Select style={disabled ? disabledStyle : undefined} onChange={onChange} disabled={disabled}>
-                {(values.map((v, index) => <option value={v.toLowerCase()} key={index}>{v}</option>))}
+                {(values.map((v, index) => <option value={v.value} key={index}>{v.displayValue ?? v.value}</option>))}
             </Select>
         </Container>
     )

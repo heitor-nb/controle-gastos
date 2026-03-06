@@ -14,7 +14,7 @@ const Info = styled.div`
     flex: 1;
     height: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     overflow: scroll;
     font-family: ${({theme}) => theme.fonts.default};
@@ -24,16 +24,16 @@ const Info = styled.div`
     white-space: nowrap;
 `
 
-interface CategoriaHeaderProps {
-    labels: string[]
-}
-
-const CategoriaHeader : FunctionComponent<CategoriaHeaderProps> = ({ labels }) => {
+const TotaisPessoaHeader : FunctionComponent = () => {
     return (
         <Container>
-            {(labels.map((l, index) => <Info key={index}>{l}</Info>))}
+            <Info>Nome</Info>
+            <Info>Idade</Info>
+            <Info>Receitas</Info>
+            <Info>Despesas</Info>
+            <Info>Saldo</Info>
         </Container>
     )
 };
 
-export default CategoriaHeader;
+export default TotaisPessoaHeader;

@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import PageContainer from "../components/PageContainer";
+import PageContainer from "../components/shared/PageContainer";
 import styled from "styled-components";
-import PageBtn from "../components/PageBtn";
-import ListContainer from "../components/ListContainer";
+import PageBtn from "../components/shared/PageBtn";
+import ListContainer from "../components/shared/ListContainer";
 import type { Categoria, TotaisPorCategoria } from "../@types/api/categoria";
 import { recuperarCategorias, recuperarTotaisPorCategoria } from "../services/categoriaService";
-import CategoriaAddForm from "../components/CategoriaAddForm";
-import CategoriaHeader from "../components/CategoriaHeader";
-import CategoriaLi from "../components/CategoriaLi";
-import TotaisFooter from "../components/TotaisFooter";
+import TotaisFooter from "../components/shared/TotaisFooter";
+import CategoriaAddForm from "../components/categoria/CategoriaAddForm";
+import CategoriaHeader from "../components/categoria/CategoriaHeader";
+import CategoriaLi from "../components/categoria/CategoriaLi";
 
 const Wrapper = styled.div`
     position: relative;

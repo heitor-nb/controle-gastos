@@ -1,11 +1,12 @@
 import { useState, type FunctionComponent } from "react";
 import styled from "styled-components";
-import FormTitle from "./FormTitle";
-import FormInput from "./FormInput";
-import PageBtn from "./PageBtn";
+import FormTitle from "../shared/FormTitle";
+import FormInput from "../shared/FormInput";
+import PageBtn from "../shared/PageBtn";
 import { IoMdClose } from "react-icons/io";
-import type { Pessoa } from "../@types/api/pessoa";
-import { editarPessoa } from "../services/pessoaService";
+import type { Pessoa } from "../../@types/api/pessoa";
+import { editarPessoa } from "../../services/pessoaService";
+import FormErrorMessage from "../shared/FormErrorMessage";
 
 const Container = styled.div`
     position: absolute;
@@ -52,10 +53,14 @@ const PessoaUpdateForm : FunctionComponent<PessoaUpdateFormProps> = ({ pessoa, s
     const [idade, setIdade] = useState<string>(pessoa?.idade.toString() ?? '');
     const [warningMessage, setWarningMessage] = useState<string>();
     const [isFetching, setIsFetching] = useState<boolean>(false);
+    const [errorMessage, setErrorMessage] = useState<string>();
 
     return pessoa && (
         <Container>
-            <IoMdClose className="close-btn" onClick={() => setPopUp(undefined)}/>
+            <IoMdClose className="close-btn" onClick={() => {
+                setTargetPessoa(undefined)
+                setPopUp(undefined);
+            }}/>
             <FormTitle text="Editar pessoa"/>
             <FormInput label="Nome" value={nome} placeholder={pessoa.nome} onChange={(e) => setNome(e.target.value)} disabled={isFetching}/>
             <FormInput label="Idade" value={idade} placeholder={pessoa.idade.toString()} onChange={(e) => {
@@ -68,20 +73,20 @@ const PessoaUpdateForm : FunctionComponent<PessoaUpdateFormProps> = ({ pessoa, s
                 }
                 setWarningMessage(undefined);
             }} warningMessage={warningMessage} disabled={isFetching}/>
+            <FormErrorMessage message={errorMessage}/>
             <PageBtn width="80%" variant="colored" fontWeight={700} text="Editar" onClick={() => {
                 if(!!warningMessage || isFetching) return;
                 setIsFetching(true);
                 editarPessoa({ id: pessoa.id, nome: nome, idade: Number(idade) })
-                    .then((pessoa) => setPessoas(prev => prev.map(p => {
-                        if(p.id === pessoa.id) return pessoa;
-                        return p;
-                    })))
-                    .catch(err => console.log(err))
-                    .finally(() => {;
-                        setIsFetching(false)
-                        setTargetPessoa(undefined)
-                        setPopUp(undefined);
-                    });
+                    .then((pessoa) => {
+                        setErrorMessage(undefined);
+                        setPessoas(prev => prev.map(p => {
+                            if(p.id === pessoa.id) return pessoa;
+                            return p;
+                        }));
+                    })
+                    .catch(err => setErrorMessage(err.message))
+                    .finally(() => setIsFetching(false));
             }} disabled={!!warningMessage || isFetching}/>
         </Container>
     )

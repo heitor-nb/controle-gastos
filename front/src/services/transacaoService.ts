@@ -17,7 +17,10 @@ export async function criarTransacao(body : CriarTransacaoRequest) : Promise<Tra
         body: JSON.stringify(body)
     });
 
-    if(!response.ok) throw new Error("Erro ao criar transação.");
+    if(!response.ok){
+        const error = await response.json();
+        throw new Error(error.message);
+    }
 
     return response.json();
 }

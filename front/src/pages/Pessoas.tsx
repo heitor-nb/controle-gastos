@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
-import PageContainer from "../components/PageContainer";
+import PageContainer from "../components/shared/PageContainer";
 import { type TotaisPorPessoa, type Pessoa } from "../@types/api/pessoa";
 import { recuperarPessoas, recuperarTotaisPorPessoa } from "../services/pessoaService";
 import styled from "styled-components";
-import PageBtn from "../components/PageBtn";
-import ListContainer from "../components/ListContainer";
-import PessoaLi from "../components/PessoaLi";
-import PessoaHeader from "../components/PessoaHeader";
-import PessoaAddForm from "../components/PessoaAddForm";
-import PessoaUpdateForm from "../components/PessoaUpdateForm";
-import TotaisPessoaHeader from "../components/TotaisPessoaHeader";
-import TotaisPessoaLi from "../components/TotaisPessoaLi";
-import TotaisFooter from "../components/TotaisFooter";
+import PageBtn from "../components/shared/PageBtn";
+import ListContainer from "../components/shared/ListContainer";
+import PessoaLi from "../components/pessoa/PessoaLi";
+import PessoaHeader from "../components/pessoa/PessoaHeader";
+import PessoaAddForm from "../components/pessoa/PessoaAddForm";
+import PessoaUpdateForm from "../components/pessoa/PessoaUpdateForm";
+import TotaisPessoaHeader from "../components/pessoa/TotaisPessoaHeader";
+import TotaisPessoaLi from "../components/pessoa/TotaisPessoaLi";
+import TotaisFooter from "../components/shared/TotaisFooter";
 
 const Wrapper = styled.div`
     position: relative;

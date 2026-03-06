@@ -29,7 +29,7 @@ const Input = styled.input`
     margin-top: 1.2rem;
     padding-left: 0.5rem;
     width: 100%;
-    height: 3rem;
+    min-height: 3rem;
     border: solid 1px ${({theme}) => theme.colors.text};
     border-radius: 0.5rem;
     transition: border-color 0.1s ease-out;

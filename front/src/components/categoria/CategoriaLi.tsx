@@ -1,6 +1,6 @@
 import { type FunctionComponent } from "react"
 import styled from "styled-components";
-import type { Categoria, TotaisCategoria } from "../@types/api/categoria";
+import type { Categoria, TotaisCategoria } from "../../@types/api/categoria";
 
 const Container = styled.div`
     padding: 0 1.5rem;
@@ -15,7 +15,7 @@ const Wrapper = styled.div`
     flex: 1;
     height: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     overflow: scroll;
     font-family: ${({theme}) => theme.fonts.default};
@@ -31,7 +31,7 @@ interface CategoriaLiProps {
 const CategoriaLi : FunctionComponent<CategoriaLiProps> = ({ categoria, totais }) => {
     if(categoria) return (
         <Container>
-            <Wrapper style={{justifyContent: 'start'}}>{categoria.id}</Wrapper>
+            <Wrapper>{categoria.id}</Wrapper>
             <Wrapper>{categoria.descricao}</Wrapper>
             <Wrapper>{categoria.finalidade}</Wrapper>
             <Wrapper>{categoria.criadoEm.substring(0, 10)}</Wrapper>

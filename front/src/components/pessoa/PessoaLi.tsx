@@ -1,8 +1,8 @@
 import { useState, type FunctionComponent } from "react"
-import type { Pessoa } from "../@types/api/pessoa"
+import type { Pessoa } from "../../@types/api/pessoa"
 import styled from "styled-components";
 import { FiEdit2, FiTrash } from "react-icons/fi";
-import { deletarPessoa } from "../services/pessoaService";
+import { deletarPessoa } from "../../services/pessoaService";
 
 const Container = styled.div`
     padding: 0 1.5rem;
@@ -17,7 +17,7 @@ const Wrapper = styled.div`
     flex: 1;
     height: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     overflow: scroll;
     font-family: ${({theme}) => theme.fonts.default};
