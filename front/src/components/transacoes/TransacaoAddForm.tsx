@@ -146,7 +146,7 @@ const TransacaoAddForm : FunctionComponent<TransacaoAddFormProps> = ({ setTransa
                         setErrorMessage(undefined);
                         setTransacoes(prev => [transacao, ...prev]);
                     })
-                    .catch(err => err.message)
+                    .catch(err => setErrorMessage(err.message))
                     .finally(() => {
                         setDescricao('');
                         setValor('');
